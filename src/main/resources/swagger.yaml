@@ -1,0 +1,160 @@
+openapi: 3.0.0
+info:
+  title: Swagger VolgSys - OpenAPI 3.0
+  description: |-
+    This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about
+    Swagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!
+    You can now help us improve the API whether it's by making changes to the definition itself or to the code.
+    That way, with time, we can improve the API in general, and expose some of the new features in OAS3.
+
+    _If you're looking for the Swagger 2.0/OAS 2.0 version of Petstore, then click [here](https://editor.swagger.io/?url=https://petstore.swagger.io/v2/swagger.yaml). Alternatively, you can load via the `Edit > Load Petstore OAS 2.0` menu option!_
+    
+    Some useful links:
+    - [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)
+    - [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://petstore3.swagger.io/api/v3
+tags:
+  - name: Endereco
+    description: Buscar endereco completo
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: whatsap
+    description: enviar mensagem
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: cpf
+    description: dados cpf
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+
+paths:
+  '/cep':
+    get:
+      tags:
+        - Endereco
+      summary: buscar Cep
+      description: Cep site correios - API
+      operationId: BuscaCep
+      parameters:
+        - in: query
+          name: cep_id
+          schema:
+            type: string
+            description: Cep para pesquisa
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CepResponse'
+        '400':
+          description: Invalid Cep
+        '404':
+          description: Cep not found
+        '405':
+          description: Validation exception
+  '/whatsap':
+    post:
+      tags:
+        - whatsap
+      summary: Enviar Mensagem
+      description: Descricao
+      operationId: SendMessage
+      parameters:
+        - in: query
+          name: phone
+          schema:
+            type: string
+            description: Cep para pesquisa
+          required: true
+        - in: query
+          name: mensagem
+          schema:
+            type: string
+            description: mensageria
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid Cep
+        '404':
+          description: Cep not found
+        '405':
+          description: Validation exception
+
+  '/cpf':
+    post:
+      tags:
+        - cpf
+      summary: Enviar Mensagem
+      description: Descricao
+      operationId: getCPF
+      parameters:
+        - in: query
+          name: cpf
+          schema:
+            type: string
+            description: Cpf para pesquisa
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid Cep
+        '404':
+          description: Cep not found
+        '405':
+          description: Validation exception
+
+components:
+  schemas:
+    CepResponse:
+      type: object
+      properties:
+        cep:
+          type: string
+          example: ""
+        logradouro:
+          type: string
+          example: ""
+        complemento:
+          type: string
+          example: ""
+        bairro:
+          type: string
+          format: ""
+        localidade:
+          type: string
+          example: ""
+        uf:
+          type: string
+          example: ""
+        ibge:
+          type: string
+          example: ""
+        gia:
+          type: string
+          example: ""
+        ddd:
+          type: string
+          example: ""
+        siafi:
+          type: string
+          example: ""
